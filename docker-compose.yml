@@ -1,0 +1,38 @@
+version: '3.4'
+
+services:
+  microservicearchitecturedb:
+    image: mongo
+    
+  rabbitmq:
+    image: rabbitmq:3-management
+
+  microservicearchitecturesqldb:
+    image: mcr.microsoft.com/mssql/server
+
+  microservicearchitectureproducts:
+    image: ${DOCKER_REGISTRY-}microservicearchitectureproducts
+    build:
+      context: .
+      dockerfile: MicroServiceArchitectureProducts/Dockerfile
+
+  microservicearchitecturesourcing:
+    image: ${DOCKER_REGISTRY-}microservicearchitecturesourcing
+    build:
+      context: .
+      dockerfile: MicroServiceArchitectureSourcing/Dockerfile
+
+
+  microservicearchitectureorder:
+    image: ${DOCKER_REGISTRY-}microservicearchitectureorder
+    build:
+      context: .
+      dockerfile: MicroServiceArchitectureOrder/Dockerfile
+
+
+  microservicearchitectureapigateway:
+    image: ${DOCKER_REGISTRY-}microservicearchitectureapigateway
+    build:
+      context: .
+      dockerfile: MicroServiceArchitectureApiGateway/Dockerfile
+
